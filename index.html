@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="tanjiro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BÙI THỊ LOAN (裴氏湾) | Sát Quỷ Đội - Hơi Thở Ngôn Ngữ | Portfolio</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='50' height='50' fill='%23101010'/><rect x='50' width='50' height='50' fill='%23009966'/><rect y='50' width='50' height='50' fill='%23009966'/><rect x='50' y='50' width='50' height='50' fill='%23101010'/></svg>">
+  
+  <!-- Google Fonts: Asian Calligraphy & Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Cinzel+Decorative:wght@700;900&family=Noto+Serif+SC:wght@500;700;900&family=Yuji+Boku&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Anime & Functional Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Nichirin Katana Slash Overlay -->
+  <div id="katana-slash-overlay" class="katana-slash-overlay"></div>
+
+  <!-- Ambient Canvas for Wisteria Petals & Fiery Embers -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Sound Effect Status Toast -->
+  <div id="sound-toast" class="sound-toast">
+    <i class="fa-solid fa-volume-high"></i> <span id="toast-text">Âm thanh kiếm thuật đã kích hoạt!</span>
+  </div>
+
+  <!-- Notification Toast for Copy -->
+  <div id="copy-toast" class="copy-toast">
+    <i class="fa-solid fa-feather-pointed"></i> Quạ Kasugai đã sao chép thông tin!
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" title="Sát Quỷ Đội - Phân ban Ngôn Ngữ">
+        <div class="brand-badge">
+          <span class="kanji-metsu">滅</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">BÙI THỊ LOAN</span>
+          <span class="brand-subtitle">裴氏湾 • KISATSUTAI</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li><a href="#profile" class="nav-link"><i class="fa-solid fa-scroll"></i> Hồ Sơ</a></li>
+          <li><a href="#skills" class="nav-link"><i class="fa-solid fa-wand-magic-sparkles"></i> Kiếm Kỹ</a></li>
+          <li><a href="#missions" class="nav-link"><i class="fa-solid fa-shield-halved"></i> Nhiệm Vụ</a></li>
+          <li><a href="#education" class="nav-link"><i class="fa-solid fa-torii-gate"></i> Học Viện FTU</a></li>
+          <li><a href="#aspirations" class="nav-link"><i class="fa-solid fa-compass"></i> Sứ Mệnh</a></li>
+          <li><a href="#contact" class="nav-link"><i class="fa-solid fa-crow"></i> Quạ Truyền Tin</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Sound FX Toggle -->
+        <button id="sound-toggle-btn" class="nav-icon-btn" title="Bật/Tắt âm thanh kiếm kỹ (Web Audio API)">
+          <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+        </button>
+
+        <!-- Theme Haori Selector -->
+        <div class="theme-dropdown-container">
+          <button id="theme-btn" class="nav-icon-btn theme-toggle" title="Đổi phong cách Áo Haori">
+            <i class="fa-solid fa-shirt"></i>
+            <span class="theme-label-short">Haori</span>
+          </button>
+          <div class="theme-dropdown" id="theme-dropdown">
+            <div class="theme-opt active" data-theme-val="tanjiro">
+              <span class="color-dot tanjiro-dot"></span> Tanjiro (Nước & Lửa)
+            </div>
+            <div class="theme-opt" data-theme-val="zenitsu">
+              <span class="color-dot zenitsu-dot"></span> Zenitsu (Lôi Điện)
+            </div>
+            <div class="theme-opt" data-theme-val="nezuko">
+              <span class="color-dot nezuko-dot"></span> Nezuko (Huyết Hoa)
+            </div>
+            <div class="theme-opt" data-theme-val="shinobu">
+              <span class="color-dot shinobu-dot"></span> Shinobu (Tử Đằng)
+            </div>
+          </div>
+        </div>
+
+        <!-- Print / PDF Button -->
+        <button onclick="window.print()" class="btn-print" title="In hoặc Xuất hồ sơ dạng PDF">
+          <i class="fa-solid fa-file-pdf"></i> In CV
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-toggle" class="mobile-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-banner" style="background-image: url('assets/images/banner.jpg');"></div>
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-kanji-pillar">
+          <span class="kanji-char glow-text">言</span>
+          <span class="kanji-char glow-text">語</span>
+          <span class="kanji-char glow-text">の</span>
+          <span class="kanji-char glow-text">呼</span>
+          <span class="kanji-char glow-text">吸</span>
+        </div>
+
+        <div class="hero-main-text">
+          <div class="hero-rank-badge">
+            <span class="badge-icon"><i class="fa-solid fa-star-half-stroke"></i></span>
+            <span class="badge-text">SÁT QUỶ ĐỘI • PHÂN BAN TRỢ LÝ & BIÊN PHIÊN DỊCH</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="hero-name-vi">BÙI THỊ LOAN</span>
+            <span class="hero-name-zh">裴氏湾</span>
+          </h1>
+
+          <p class="hero-tagline">
+            <span class="quote-mark">「</span>
+            Tâm như nước tĩnh, kiếm bén tựa ngôn từ. Lấy sự chuẩn xác làm lưỡi kiếm, lấy lòng nhiệt huyết làm hơi thở.
+            <span class="quote-mark">」</span>
+          </p>
+
+          <div class="hero-meta-badges">
+            <div class="meta-item">
+              <i class="fa-solid fa-graduation-cap"></i> Đại học Ngoại Thương (2024 - 2028)
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-language"></i> Tiếng Trung Thương Mại (HSK 5)
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-earth-americas"></i> Tiếng Anh B1
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-location-dot"></i> Hà Nội
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#skills" class="btn btn-primary slash-effect-btn">
+              <span class="blade-shine"></span>
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Khám Phá Thức Kiếm
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <i class="fa-solid fa-crow"></i> Gửi Quạ Truyền Tin
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-avatar-wrapper">
+          <div class="avatar-card-frame">
+            <div class="haori-border-pattern"></div>
+            <div class="avatar-img-container" id="avatar-container" title="Nhấp để tải ảnh khác của bạn lên">
+              <img src="assets/images/portrait.png" alt="Bùi Thị Loan - Demon Slayer" class="avatar-img" id="portfolio-avatar">
+              <div class="avatar-tag-kanji">誠勇華志</div>
+              <div class="avatar-hover-overlay">
+                <i class="fa-solid fa-camera"></i>
+                <span>Tải ảnh khác</span>
+              </div>
+            </div>
+            <div class="avatar-sword-badge">
+              <i class="fa-solid fa-circle-check"></i> Kiếm Sĩ Bùi Thị Loan
+            </div>
+            <div class="avatar-controls">
+              <button type="button" class="btn-change-photo" id="btn-upload-photo" title="Tải ảnh chân dung khác từ máy tính của bạn">
+                <i class="fa-solid fa-camera"></i> Tải ảnh khác
+              </button>
+              <button type="button" class="btn-toggle-anime" id="btn-toggle-anime" title="Chuyển đổi giữa ảnh thật và ảnh Anime Sát Quỷ Đội">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Bản Anime
+              </button>
+              <input type="file" id="avatar-file-input" accept="image/*" style="display: none;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll-indicator">
+        <a href="#profile" class="scroll-down-arrow">
+          <span>KÉO XUỐNG ĐỂ RÚT KIẾM</span>
+          <i class="fa-solid fa-angles-down"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profile & Demon Slayer Stats Section -->
+  <section class="section profile-section" id="profile">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-subtitle">TÂM PHÁP & CĂN CƯỚC KIẾM SĨ</span>
+        <h2 class="section-title">
+          <span class="title-decor">『</span> GIỚI THIỆU BẢN THÂN <span class="title-decor">』</span>
+        </h2>
+        <div class="katana-line"></div>
+      </div>
+
+      <div class="profile-grid">
+        <!-- Demon Slayer Corps ID Card -->
+        <div class="demon-id-card">
+          <div class="id-card-header">
+            <div class="id-card-seal">鬼殺隊</div>
+            <div class="id-card-title-group">
+              <h3>THẺ CĂN CƯỚC SÁT QUỶ ĐỘI</h3>
+              <span>DEMON SLAYER CORPS IDENTIFICATION</span>
+            </div>
+          </div>
+
+          <div class="id-card-body">
+            <div class="id-info-row">
+              <span class="label">Họ và Tên:</span>
+              <span class="value highlight">BÙI THỊ LOAN (裴氏湾)</span>
+            </div>
+            <div class="id-info-row">
+              <span class="label">Cấp bậc:</span>
+              <span class="value">Kizato (Quý Đẳng) - Trụ Cột Tương Lai</span>
+            </div>
+            <div class="id-info-row">
+              <span class="label">Học Phái:</span>
+              <span class="value">Học Viện Ngoại Thương (FTU)</span>
+            </div>
+            <div class="id-info-row">
+              <span class="label">Hệ Phái Hơi Thở:</span>
+              <span class="value breath-tag">Hơi Thở của Ngôn Ngữ (言語の呼吸)</span>
+            </div>
+            <div class="id-info-row">
+              <span class="label">Lưỡi Kiếm Nichirin:</span>
+              <span class="value">Ngọc Thạch & Mực Đen Thư Pháp</span>
+            </div>
+            <div class="id-info-row">
+              <span class="label">Đặc tính:</span>
+              <span class="value">Nghiêm túc • Chăm chỉ • Lạc quan • Tinh thần trách nhiệm cao</span>
+            </div>
+          </div>
+
+          <div class="id-card-footer">
+            <div class="id-stamp">
+              <span>ĐÃ PHÊ DUYỆT</span>
+              <small>産屋敷</small>
+            </div>
+            <p class="id-motto">"Không ngừng mài giũa bản thân - Vượt qua mọi ranh giới ngôn ngữ"</p>
+          </div>
+        </div>
+
+        <!-- Personal Philosophy & Core Attributes -->
+        <div class="profile-narrative">
+          <div class="narrative-box">
+            <h3 class="narrative-heading"><i class="fa-solid fa-scroll"></i> Bản Tính & Chí Hướng</h3>
+            <p>
+              Tôi là một người luôn giữ thái độ <strong>nghiêm túc, chăm chỉ và tinh thần trách nhiệm cao</strong> trong mọi nhiệm vụ được giao. Đồng thời, nguồn năng lượng <strong>lạc quan và cầu tiến</strong> giúp tôi luôn sẵn sàng đón nhận những thử thách mới và thích nghi nhanh chóng với môi trường đa dạng.
+            </p>
+            <p>
+              Với đam mê sâu sắc dành cho tiếng Trung và văn hóa Á Đông, tôi không ngừng tích lũy kinh nghiệm trong các vai trò <strong>biên - phiên dịch, trợ lý ngôn ngữ và hỗ trợ khách hàng</strong>, hướng tới việc trở thành một cầu nối ngôn ngữ vững chãi và chuẩn xác.
+            </p>
+          </div>
+
+          <!-- RPG-style Stat Meters -->
+          <div class="stats-container">
+            <h4 class="stats-title"><i class="fa-solid fa-chart-simple"></i> Chỉ Số Năng Lực Kiếm Sĩ</h4>
+            
+            <div class="stat-bar-group">
+              <div class="stat-info">
+                <span><i class="fa-solid fa-heart-pulse"></i> Tinh Thần Trách Nhiệm</span>
+                <span class="stat-pct">98%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill" style="width: 98%;"></div></div>
+            </div>
+
+            <div class="stat-bar-group">
+              <div class="stat-info">
+                <span><i class="fa-solid fa-bolt-lightning"></i> Khả Năng Thích Nghi & Học Hỏi</span>
+                <span class="stat-pct">95%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div>
+            </div>
+
+            <div class="stat-bar-group">
+              <div class="stat-info">
+                <span><i class="fa-solid fa-users"></i> Làm Việc Nhóm & Giao Tiếp</span>
+                <span class="stat-pct">92%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill" style="width: 92%;"></div></div>
+            </div>
+
+            <div class="stat-bar-group">
+              <div class="stat-info">
+                <span><i class="fa-solid fa-pen-nib"></i> Năng Lực Biên - Phiên Dịch</span>
+                <span class="stat-pct">90%</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section: The 5 Forms of Language Breathing -->
+  <section class="section skills-section" id="skills">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-subtitle">THIÊN BIẾN VẠN HÓA KIẾM KỸ</span>
+        <h2 class="section-title">
+          <span class="title-decor">『</span> HƠI THỞ CỦA NGÔN NGỮ <span class="title-decor">』</span>
+        </h2>
+        <p class="section-desc">Hệ thống kỹ năng được tôi luyện như các thức kiếm kỹ trong Sát Quỷ Đội</p>
+        <div class="katana-line"></div>
+      </div>
+
+      <div class="skills-grid">
+        <!-- Form 1: HSK 5 / Chinese -->
+        <div class="skill-card form-card" data-form="1">
+          <div class="form-header">
+            <span class="form-number">THỨC THỨ NHẤT</span>
+            <span class="form-kanji">壱ノ型</span>
+          </div>
+          <h3 class="form-name">Hán Ngữ Thần Trảm</h3>
+          <div class="form-level-badge"><i class="fa-solid fa-award"></i> Tiếng Trung HSK 5 / HSK 4-5</div>
+          <p class="form-desc">
+            Thành thạo 4 kỹ năng <strong>Nghe - Nói - Đọc - Viết</strong>. Khả năng giao tiếp lưu loát hằng ngày, nắm vững ngữ pháp chuyên sâu và kiến thức hội thoại thương mại.
+          </p>
+          <div class="skill-tags">
+            <span>Nghe - Nói Hàng Ngày</span>
+            <span>Hán Tự & Ngữ Pháp</span>
+            <span>Thương Mại Đàm Phán</span>
+          </div>
+          <div class="form-blade-effect"></div>
+        </div>
+
+        <!-- Form 2: Native Vietnamese -->
+        <div class="skill-card form-card" data-form="2">
+          <div class="form-header">
+            <span class="form-number">THỨC THỨ HAI</span>
+            <span class="form-kanji">弐ノ型</span>
+          </div>
+          <h3 class="form-name">Bản Ngữ Lưu Thủy</h3>
+          <div class="form-level-badge"><i class="fa-solid fa-star"></i> Tiếng Việt Bản Ngữ</div>
+          <p class="form-desc">
+            Vận dụng tiếng mẹ đẻ với độ mượt mà tựa dòng nước. Giao tiếp lưu loát, chuẩn văn phong, khả năng diễn đạt ý tưởng gãy gọn và truyền cảm hứng.
+          </p>
+          <div class="skill-tags">
+            <span>Giao Tiếp Bản Ngữ</span>
+            <span>Diễn Đạt Linh Hoạt</span>
+            <span>Văn Phong Súc Tích</span>
+          </div>
+          <div class="form-blade-effect"></div>
+        </div>
+
+        <!-- Form 3: English B1 -->
+        <div class="skill-card form-card" data-form="3">
+          <div class="form-header">
+            <span class="form-number">THỨC THỨ BA</span>
+            <span class="form-kanji">参ノ型</span>
+          </div>
+          <h3 class="form-name">Anh Ngữ Phong Luân</h3>
+          <div class="form-level-badge"><i class="fa-solid fa-globe"></i> Tiếng Anh Trình Độ B1</div>
+          <p class="form-desc">
+            Hơi thở của gió giúp mở rộng tầm nhìn toàn cầu. Đọc hiểu tài liệu, giao tiếp căn bản và sẵn sàng hội nhập trong môi trường đa văn hóa.
+          </p>
+          <div class="skill-tags">
+            <span>Đọc Hiểu Tài Liệu</span>
+            <span>Giao Tiếp Cơ Bản</span>
+            <span>Tra Cứu Quốc Tế</span>
+          </div>
+          <div class="form-blade-effect"></div>
+        </div>
+
+        <!-- Form 4: Office Suite -->
+        <div class="skill-card form-card" data-form="4">
+          <div class="form-header">
+            <span class="form-number">THỨC THỨ TƯ</span>
+            <span class="form-kanji">肆ノ型</span>
+          </div>
+          <h3 class="form-name">Văn Phòng Thần Tốc</h3>
+          <div class="form-level-badge"><i class="fa-solid fa-laptop-code"></i> Tin Học Văn Phòng Thành Thạo</div>
+          <p class="form-desc">
+            Tam bảo kiếm pháp công nghệ: Soạn thảo văn bản chuẩn chỉnh trên <strong>Word</strong>, xử lý số liệu & bảng biểu trên <strong>Excel</strong>, và thiết kế bài thuyết trình sinh động với <strong>PowerPoint</strong>.
+          </p>
+          <div class="skill-tags">
+            <span>Microsoft Word</span>
+            <span>Microsoft Excel</span>
+            <span>Microsoft PowerPoint</span>
+          </div>
+          <div class="form-blade-effect"></div>
+        </div>
+
+        <!-- Form 5: Soft Skills / Teamwork -->
+        <div class="skill-card form-card span-full" data-form="5">
+          <div class="form-header">
+            <span class="form-number">THỨC THỨ NĂM</span>
+            <span class="form-kanji">伍ノ型</span>
+          </div>
+          <h3 class="form-name">Đồng Đội Tương Hỗ & Thích Ứng</h3>
+          <div class="form-level-badge"><i class="fa-solid fa-hands-holding-circle"></i> Kỹ Năng Mềm Cốt Lõi</div>
+          <p class="form-desc">
+            Khả năng phối hợp đồng đội ăn ý như các kiếm sĩ trong trận chiến. Lắng nghe, thấu hiểu, phản hồi tích cực và khả năng tự nghiên cứu, thích nghi nhạy bén trước mọi tình huống phát sinh.
+          </p>
+          <div class="soft-skills-cluster">
+            <div class="soft-pill"><i class="fa-solid fa-ear-listen"></i> Lắng Nghe & Thấu Cảm</div>
+            <div class="soft-pill"><i class="fa-solid fa-people-group"></i> Làm Việc Nhóm Hiệu Quả</div>
+            <div class="soft-pill"><i class="fa-solid fa-shield-heart"></i> Tinh Thần Trách Nhiệm</div>
+            <div class="soft-pill"><i class="fa-solid fa-seedling"></i> Học Hỏi Nhanh Chóng</div>
+            <div class="soft-pill"><i class="fa-solid fa-arrows-spin"></i> Thích Nghi Linh Hoạt</div>
+          </div>
+          <div class="form-blade-effect"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Missions & Experience Section -->
+  <section class="section missions-section" id="missions">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-subtitle">NHẬT KÝ THỰC CHIẾN</span>
+        <h2 class="section-title">
+          <span class="title-decor">『</span> KINH NGHIỆM VÀ NHIỆM VỤ <span class="title-decor">』</span>
+        </h2>
+        <p class="section-desc">Hành trình cọ xát thực tế, rèn giũa bản lĩnh ngôn ngữ qua từng thử thách</p>
+        <div class="katana-line"></div>
+      </div>
+
+      <div class="mission-timeline">
+        <!-- Mission 1: Translation for Chinese Club -->
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <span class="marker-kanji">壱</span>
+          </div>
+          <div class="timeline-content scroll-look">
+            <div class="mission-badge">NHIỆM VỤ BIÊN DỊCH</div>
+            <h3 class="mission-title">Tham Gia Biên Dịch Cho CLB Tiếng Trung</h3>
+            <span class="mission-role"><i class="fa-solid fa-feather"></i> Ban Biên Dịch & Nội Dung CLB</span>
+            <p class="mission-summary">
+              Trực tiếp tham gia biên dịch các bài viết, ấn phẩm văn hóa, tin tức và tư liệu học tập từ tiếng Trung sang tiếng Việt và ngược lại.
+            </p>
+            <ul class="mission-highlights">
+              <li><i class="fa-solid fa-check"></i> Tra cứu chuẩn xác thuật ngữ, giữ trọn ngữ nghĩa và sắc thái văn hóa Á Đông.</li>
+              <li><i class="fa-solid fa-check"></i> Phối hợp cùng ban nội dung biên tập ấn phẩm đạt độ trau chuốt và chuẩn ngữ pháp.</li>
+              <li><i class="fa-solid fa-check"></i> Đảm bảo tiến độ xuất bản bài đăng của Câu lạc bộ đúng hạn.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mission 2: Pronunciation & Speaking Peer Tutor -->
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <span class="marker-kanji">弐</span>
+          </div>
+          <div class="timeline-content scroll-look">
+            <div class="mission-badge">NHIỆM VỤ ĐỒNG HÀNH</div>
+            <h3 class="mission-title">Hỗ Trợ Bạn Bè Luyện Nói & Sửa Phát Âm</h3>
+            <span class="mission-role"><i class="fa-solid fa-user-group"></i> Trợ Lực Phát Âm & Giao Tiếp</span>
+            <p class="mission-summary">
+              Đồng hành cùng các bạn học trong việc rèn luyện thanh điệu tiếng Trung, chỉnh sửa khẩu hình và luyện tập phản xạ giao tiếp tự nhiên.
+            </p>
+            <ul class="mission-highlights">
+              <li><i class="fa-solid fa-check"></i> Hướng dẫn phân biệt chuẩn xác các thanh mẫu, vận mẫu dễ nhầm lẫn trong Hán ngữ (z, c, s, zh, ch, sh).</li>
+              <li><i class="fa-solid fa-check"></i> Tạo môi trường thực hành hội thoại vui vẻ, thoải mái, giúp bạn bè tự tin khi nói tiếng Trung.</li>
+              <li><i class="fa-solid fa-check"></i> Rèn luyện kỹ năng sư phạm, kiên nhẫn và khả năng truyền đạt kiến thức dễ hiểu.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Mission 3: Communication & Teamwork -->
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <span class="marker-kanji">参</span>
+          </div>
+          <div class="timeline-content scroll-look">
+            <div class="mission-badge">KỸ NĂNG THỰC CHIẾN</div>
+            <h3 class="mission-title">Giao Tiếp Hiệu Quả & Phối Hợp Đội Nhóm</h3>
+            <span class="mission-role"><i class="fa-solid fa-diagram-project"></i> Tinh Thần Cộng Sự</span>
+            <p class="mission-summary">
+              Tích cực tham gia các dự án tập thể, sự kiện giao lưu văn hóa và các cuộc thi tiếng Trung trong và ngoài trường Đại học Ngoại thương.
+            </p>
+            <ul class="mission-highlights">
+              <li><i class="fa-solid fa-check"></i> Kỹ năng giao tiếp khéo léo, dung hòa ý kiến các thành viên trong nhóm.</li>
+              <li><i class="fa-solid fa-check"></i> Khả năng giải quyết vấn đề linh hoạt và sẵn sàng gánh vác trách nhiệm chung.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section: Foreign Trade University -->
+  <section class="section education-section" id="education">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-subtitle">NƠI RÈN ĐÚC BẢN LĨNH</span>
+        <h2 class="section-title">
+          <span class="title-decor">『</span> HỌC VIỆN NGOẠI THƯƠNG <span class="title-decor">』</span>
+        </h2>
+        <p class="section-desc">Đại học Ngoại thương (FTU) - Môi trường đào tạo năng động hàng đầu</p>
+        <div class="katana-line"></div>
+      </div>
+
+      <div class="education-card">
+        <div class="edu-crest-col">
+          <div class="edu-crest">
+            <i class="fa-solid fa-torii-gate"></i>
+            <span class="edu-crest-text">FTU</span>
+          </div>
+          <div class="edu-years">2024 - 2028</div>
+        </div>
+
+        <div class="edu-content-col">
+          <div class="edu-school-name">TRƯỜNG ĐẠI HỌC NGOẠI THƯƠNG (HÀ NỘI)</div>
+          <h3 class="edu-major">Chuyên ngành: Tiếng Trung Thương Mại</h3>
+          <p class="edu-overview">
+            Được đào tạo bài bản trong môi trường học thuật chuyên nghiệp của FTU, kết hợp sâu sắc giữa năng lực ngôn ngữ Hán và kiến thức thương mại quốc tế.
+          </p>
+
+          <div class="edu-subjects-block">
+            <h4 class="sub-heading"><i class="fa-solid fa-book-bookmark"></i> Các Trụ Cột Học Thuật Chính:</h4>
+            <div class="subject-grid">
+              <div class="subject-pill">
+                <i class="fa-solid fa-file-lines"></i>
+                <div class="sub-detail">
+                  <strong>Ngữ Pháp Tiếng Trung</strong>
+                  <span>Hệ thống cấu trúc chuẩn xác, văn phong học thuật và ứng dụng</span>
+                </div>
+              </div>
+              <div class="subject-pill">
+                <i class="fa-solid fa-comments"></i>
+                <div class="sub-detail">
+                  <strong>Hội Thoại Thương Mại</strong>
+                  <span>Đàm phán, giao dịch, trao đổi đối tác doanh nghiệp Trung - Việt</span>
+                </div>
+              </div>
+              <div class="subject-pill">
+                <i class="fa-solid fa-repeat"></i>
+                <div class="sub-detail">
+                  <strong>Cơ Sở Biên – Phiên Dịch</strong>
+                  <span>Phương pháp chuyển ngữ, xử lý văn cảnh và phản xạ dịch trực tiếp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="edu-activities">
+            <h4 class="sub-heading"><i class="fa-solid fa-trophy"></i> Hoạt Động & Thi Đấu:</h4>
+            <p>
+              Tích cực tham gia <strong>CLB Tiếng Trung FTU</strong>, các hoạt động giao lưu ngôn ngữ song phương và các cuộc thi tiếng Trung quy mô trong và ngoài trường nhằm cọ xát kinh nghiệm.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aspirations & Hobbies Section -->
+  <section class="section aspirations-section" id="aspirations">
+    <div class="section-container">
+      <div class="aspirations-grid">
+        <!-- Career Objectives -->
+        <div class="box-panel career-goal-box">
+          <div class="panel-header">
+            <i class="fa-solid fa-bullseye-arrow panel-icon"></i>
+            <div>
+              <span class="panel-sub">KHÁT VỌNG TRỤ CỘT</span>
+              <h3 class="panel-title">MỤC TIÊU NGHỀ NGHIỆP</h3>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="goal-item">
+              <div class="goal-bullet"><i class="fa-solid fa-circle-dot"></i></div>
+              <div class="goal-text">
+                <strong>Vị trí hướng tới:</strong> Làm việc trong các lĩnh vực ứng dụng tiếng Trung chuyên sâu như <strong>Biên - Phiên dịch, Trợ lý ngôn ngữ</strong> hoặc <strong>Chuyên viên Chăm sóc khách hàng</strong> tại các doanh nghiệp đa quốc gia.
+              </div>
+            </div>
+            <div class="goal-item">
+              <div class="goal-bullet"><i class="fa-solid fa-circle-dot"></i></div>
+              <div class="goal-text">
+                <strong>Nâng cao thực lực:</strong> Không ngừng nâng cấp chứng chỉ tiếng Trung HSK, tích lũy vốn từ vựng chuyên ngành kinh tế - thương mại thực tế.
+              </div>
+            </div>
+            <div class="goal-item">
+              <div class="goal-bullet"><i class="fa-solid fa-circle-dot"></i></div>
+              <div class="goal-text">
+                <strong>Phát triển nghề nghiệp:</strong> Trở thành cầu nối văn hóa và thương mại vững chắc, mang lại giá trị thiết thực và lâu dài cho tổ chức.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hobbies & Lifestyle -->
+        <div class="box-panel hobbies-box">
+          <div class="panel-header">
+            <i class="fa-solid fa-heart panel-icon"></i>
+            <div>
+              <span class="panel-sub">PHONG THÁI KIẾM SĨ</span>
+              <h3 class="panel-title">SỞ THÍCH & ĐAM MÊ</h3>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="hobby-cards-wrapper">
+              <div class="hobby-card">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <h4>Văn Hóa Trung Quốc</h4>
+                <p>Khám phá lịch sử, phong tục, nghệ thuật thư pháp và văn học Hán cổ.</p>
+              </div>
+              <div class="hobby-card">
+                <i class="fa-solid fa-music"></i>
+                <h4>Âm Nhạc & Phim Ảnh</h4>
+                <p>Thưởng thức giai điệu C-pop, OST anime, xem phim nâng cao cảm thụ ngôn ngữ.</p>
+              </div>
+              <div class="hobby-card">
+                <i class="fa-solid fa-earth-asia"></i>
+                <h4>Giao Lưu Đa Văn Hóa</h4>
+                <p>Kết nối bạn bè khắp nơi, tìm hiểu những nét đẹp đa sắc màu trên thế giới.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kasugai Crow Contact Section -->
+  <section class="section contact-section" id="contact">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-subtitle">TRUYỀN THƯ KASUGAI</span>
+        <h2 class="section-title">
+          <span class="title-decor">『</span> LIÊN HỆ & KẾT NỐI <span class="title-decor">』</span>
+        </h2>
+        <p class="section-desc">Hãy gửi thông điệp qua quạ truyền tin hoặc liên hệ trực tiếp với tôi</p>
+        <div class="katana-line"></div>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Info Cards -->
+        <div class="contact-methods">
+          <!-- Phone Card -->
+          <div class="contact-card" onclick="copyToClipboard('0353726004', 'Số điện thoại')">
+            <div class="card-icon-bubble">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="card-details">
+              <span class="contact-type">ĐIỆN THOẠI / ZALO</span>
+              <span class="contact-val">0353726004</span>
+              <small class="copy-hint"><i class="fa-regular fa-copy"></i> Nhấp để sao chép số</small>
+            </div>
+            <a href="tel:0353726004" class="direct-link-btn" title="Gọi ngay" onclick="event.stopPropagation()">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Email Card -->
+          <div class="contact-card" onclick="copyToClipboard('loanbuik5@gmail.com', 'Địa chỉ Email')">
+            <div class="card-icon-bubble">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="card-details">
+              <span class="contact-type">EMAIL HỒ SƠ</span>
+              <span class="contact-val">loanbuik5@gmail.com</span>
+              <small class="copy-hint"><i class="fa-regular fa-copy"></i> Nhấp để sao chép email</small>
+            </div>
+            <a href="mailto:loanbuik5@gmail.com" class="direct-link-btn" title="Gửi email" onclick="event.stopPropagation()">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <!-- Location Card -->
+          <div class="contact-card location-card">
+            <div class="card-icon-bubble">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="card-details">
+              <span class="contact-type">ĐỊA BÀN HOẠT ĐỘNG</span>
+              <span class="contact-val">Hà Nội, Việt Nam</span>
+              <small class="copy-hint"><i class="fa-solid fa-map-pin"></i> Sẵn sàng làm việc trực tiếp hoặc từ xa</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Kasugai Message Form -->
+        <div class="contact-form-container">
+          <div class="crow-header">
+            <div class="crow-avatar">
+              <i class="fa-solid fa-crow"></i>
+            </div>
+            <div>
+              <h3>QUẠ KASUGAI TRUYỀN TIN</h3>
+              <span>Gửi lời nhắn trực tiếp tới Bùi Thị Loan</span>
+            </div>
+          </div>
+
+          <form id="kasugai-form" class="kasugai-form" onsubmit="handleMessageSubmit(event)">
+            <div class="form-group">
+              <label for="sender-name"><i class="fa-solid fa-user-ninja"></i> Danh Xưng / Nhà Tuyển Dụng</label>
+              <input type="text" id="sender-name" placeholder="Quý công ty / Họ tên của bạn" required>
+            </div>
+
+            <div class="form-group">
+              <label for="sender-email"><i class="fa-solid fa-at"></i> Địa Chỉ Email Liên Lạc</label>
+              <input type="email" id="sender-email" placeholder="example@company.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="sender-message"><i class="fa-solid fa-message"></i> Nội Dung Thông Điệp / Đề Nghị Hợp Tác</label>
+              <textarea id="sender-message" rows="4" placeholder="Nhập lời nhắn, cơ hội nghề nghiệp hoặc đề xuất hợp tác..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn">
+              <span class="blade-shine"></span>
+              <i class="fa-solid fa-paper-plane"></i> Phóng Quạ Truyền Thư
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <span class="kanji-metsu-sm" id="easter-egg-trigger" title="Nhấp để thức tỉnh Dấu Ấn Sát Quỷ (Demon Slayer Mark)">滅</span>
+        <span>KISATSUTAI • BÙI THỊ LOAN (裴氏湾)</span>
+      </div>
+      <p class="footer-quote">
+        "Đừng bao giờ từ bỏ. Hãy rèn luyện con người mình đến mức hoàn hảo nhất có thể!"
+      </p>
+      <div class="footer-copyright">
+        &copy; 2026 Hồ Sơ Cá Nhân Bùi Thị Loan. Thiết kế theo phong cách Demon Slayer (Kimetsu no Yaiba).
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
